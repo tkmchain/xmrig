@@ -24,6 +24,32 @@ The preferred way to configure the miner is the [JSON config file](https://xmrig
 * **[Wizard](https://xmrig.com/wizard)** helps you create initial configuration for the miner.
 * **[Workers](http://workers.xmrig.info)** helps manage your miners via HTTP API.
 
+## Mine TKM
+
+The release archive includes a TKM-ready `config.json`. Before starting,
+replace `YOUR_TKM_WALLET_ADDRESS` with the wallet address where you want pool
+payments sent. The included pool is `pool.tkmchain.site:33330` and uses the
+TKM RandomX algorithm `rx/tkm`.
+
+Run the miner from the directory containing the executable and config:
+
+```sh
+./xmrig --config=config.json
+```
+
+On Windows, open Command Prompt in the extracted directory and run:
+
+```bat
+xmrig.exe --config=config.json
+```
+
+The miner prints accepted and rejected shares in the terminal. Keep the
+terminal open while mining. Set a worker name by changing `rig-id` in the
+pool entry. The pool dashboard is available at `https://pool.tkmchain.site`.
+
+For Android, copy the native binary and `config.json` into an executable
+directory, replace the wallet address, then run `./xmrig --config=config.json`.
+
 ## Donations
 * Default donation 1% (1 minute in 100 minutes) can be increased via option `donate-level` or disabled in source code.
 * XMR: `48edfHu7V9Z84YzzMa6fUueoELZ9ZRXq9VetWzYGzKt52XU5xvqgzYnDK9URnRoJMk1j8nLwEVsaSWJ4fhdUyZijBGUicoD`
