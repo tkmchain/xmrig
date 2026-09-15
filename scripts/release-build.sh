@@ -71,11 +71,12 @@ stage=$work/$name
 mkdir -p "$stage"
 exe=$(find "$work/miner" -maxdepth 1 -type f -name 'xmrig*' -perm -111 -print -quit)
 [[ -n $exe ]] || { echo "miner executable was not produced" >&2; exit 1; }
+exe_name=$(basename "$exe")
 cp "$exe" "$stage/"
 cp "$root/LICENSE" "$root/src/config.json" "$stage/"
 cp "$root/.github/RELEASES.md" "$stage/README.md"
-file "$stage/$exe"
-if [[ $platform == macos || ($platform == linux && $arch == x64) ]]; then "$stage/$exe" --version; fi
+file "$stage/$exe_name"
+if [[ $platform == macos || ($platform == linux && $arch == x64) ]]; then "$stage/$exe_name" --version; fi
 if [[ $platform == windows ]]; then
  (cd "$work" && zip -qr "$root/dist/$name.zip" "$name")
 else
