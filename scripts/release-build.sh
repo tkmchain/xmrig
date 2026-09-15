@@ -69,9 +69,9 @@ cmake --build "$work/miner" --parallel "$jobs"
 name=xmrig-$platform-$arch
 stage=$work/$name
 mkdir -p "$stage"
-exe=xmrig
-[[ $platform != windows ]] || exe=xmrig.exe
-cp "$work/miner/$exe" "$stage/"
+exe=$(find "$work/miner" -maxdepth 1 -type f -name 'xmrig*' -perm -111 -print -quit)
+[[ -n $exe ]] || { echo "miner executable was not produced" >&2; exit 1; }
+cp "$exe" "$stage/"
 cp "$root/LICENSE" "$root/src/config.json" "$stage/"
 cp "$root/.github/RELEASES.md" "$stage/README.md"
 file "$stage/$exe"
