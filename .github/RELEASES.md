@@ -11,7 +11,8 @@ Manual workflow runs build downloadable Actions artifacts without publishing.
 | macOS 11+ | x64, ARMv8 (Apple Silicon) |
 | Android 7+ (API 24) | x86, x64, ARMv7, ARMv8 |
 
-These are CPU miner executables with TLS and statically linked OpenSSL/libuv.
+These are CPU miner executables with libuv support. TLS is disabled for the
+portable cross-builds because the target SDKs provide different TLS stacks.
 GPU backends, hwloc, MSR tuning and DMI are disabled for portability.
 Linux still requires the target system's libc. ARMv7 requires NEON.
 32-bit binaries have limited address space; use a 64-bit miner for RandomX
