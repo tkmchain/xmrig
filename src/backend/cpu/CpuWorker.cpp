@@ -294,6 +294,17 @@ void xmrig::CpuWorker<N>::start()
 #           ifdef XMRIG_ALGO_RANDOMX
             uint8_t* miner_signature_ptr = m_job.blob() + m_job.nonceOffset() + m_job.nonceSize();
             if (job.algorithm().family() == Algorithm::RANDOM_X) {
+                // TKM jobs are a compact seal-hash + nonce blob. Do not use
+                // RandomX's pipelined first/next API here: its output belongs
+                // to the prior input and can therefore be paired with the
+                // wrong submitted nonce. Hash this exact blob in one call.
+                if (job.algorithm() == Algorithm::RX_TKM) {
+                    randomx_calculate_hash(m_vm, m_job.blob(), job.size(), m_hash);
+                    if (!nextRound()) {
+                        break;
+                    }
+                }
+                else {
                 if (first) {
                     first = false;
                     if (job.hasMinerSignature()) {
@@ -323,6 +334,7 @@ void xmrig::CpuWorker<N>::start()
                     randomx_calculate_commitment(prev_job, prev_job_size, m_hash, m_hash);
                     prev_job_size = job.size();
                     memcpy(prev_job, m_job.blob(), prev_job_size);
+                }
                 }
             }
             else
@@ -568,4 +580,3 @@ template class CpuWorker<5>;
 template class CpuWorker<8>;
 
 } // namespace xmrig
-
