@@ -28,8 +28,12 @@ The preferred way to configure the miner is the [JSON config file](https://xmrig
 
 The release archive includes a TKM-ready `config.json`. Before starting,
 replace `YOUR_TKM_WALLET_ADDRESS` with the wallet address where you want pool
-payments sent. The included pool is `pool.tkmchain.site:33330` and uses the
-TKM RandomX algorithm `rx/tkm`.
+payments sent. The included pool is the Tor onion service
+`4aof7abdduh4vftejgdpdfqeosvxxco3xmpu4uqypnpdbi7wjuzfqhqd.onion:33330` and
+uses the TKM RandomX algorithm `rx/tkm`. Start Tor with a local SOCKS5 proxy
+on `127.0.0.1:9050` before starting XMRig. The pool entry must contain
+`"socks5": "socks5://127.0.0.1:9050"`; XMRig cannot resolve `.onion` names
+through ordinary DNS.
 
 Run the miner from the directory containing the executable and config:
 

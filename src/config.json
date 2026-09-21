@@ -62,7 +62,7 @@
         {
             "algo": "rx/tkm",
             "coin": "TKM",
-            "url": "pool.tkmchain.site:33330",
+            "url": "4aof7abdduh4vftejgdpdfqeosvxxco3xmpu4uqypnpdbi7wjuzfqhqd.onion:33330",
             "user": "YOUR_TKM_WALLET_ADDRESS",
             "pass": "x",
             "rig-id": null,
@@ -72,7 +72,7 @@
             "tls": false,
             "tls-fingerprint": null,
             "daemon": false,
-            "socks5": null,
+            "socks5": "socks5://127.0.0.1:9050",
             "self-select": null,
             "submit-to-origin": false
         }
