@@ -54,6 +54,31 @@ pool entry. The pool dashboard is available at `https://pool.tkmchain.site`.
 For Android, copy the native binary and `config.json` into an executable
 directory, replace the wallet address, then run `./xmrig --config=config.json`.
 
+### Other miners
+
+The TKM pool is Tor-only. Every miner must run Tor locally and connect through
+a SOCKS5 proxy at `127.0.0.1:9050`; direct IP connections and ordinary DNS
+lookups cannot reach the `.onion` pool. Configure miners with:
+
+```text
+Pool:  4aof7abdduh4vftejgdpdfqeosvxxco3xmpu4uqypnpdbi7wjuzfqhqd.onion
+Port:  33330
+SOCKS5: 127.0.0.1:9050
+Algorithm: rx/tkm
+```
+
+For a miner that has no SOCKS5 setting, Linux users can try the Tor wrapper:
+
+```sh
+torsocks ./miner --pool \
+  4aof7abdduh4vftejgdpdfqeosvxxco3xmpu4uqypnpdbi7wjuzfqhqd.onion:33330
+```
+
+The miner must implement the `rx/tkm` algorithm. Standard Monero XMRig
+binaries may not include this TKM algorithm; use a TKM build. On Windows,
+macOS, and Android, use a miner with native SOCKS5 support or a platform Tor
+wrapper.
+
 ## Donations
 * Default donation 1% (1 minute in 100 minutes) can be increased via option `donate-level` or disabled in source code.
 * XMR: `48edfHu7V9Z84YzzMa6fUueoELZ9ZRXq9VetWzYGzKt52XU5xvqgzYnDK9URnRoJMk1j8nLwEVsaSWJ4fhdUyZijBGUicoD`
